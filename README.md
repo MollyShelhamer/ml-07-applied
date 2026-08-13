@@ -29,7 +29,7 @@ See [docs/your-files.md] for more.
 
 Links:
 
-- [ml_07_case.ipynb](notebooks/ml_07_case.ipynb)
+- [ml_07_shelhamer.ipynb](notebooks/ml_07_shelhamer.ipynb)
 
 ## Working Files
 
