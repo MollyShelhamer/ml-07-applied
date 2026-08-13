@@ -21,75 +21,23 @@ to get the example projects running on your machine.
 
 ## Phase 4. Technical Modification
 
-Describe your small technical modification to the example project.
-
-Include:
-
-- What you changed
-- Why you chose that change
-- How you verified that it worked
-- What result, output, chart, metric, or behavior confirmed the change
-
-Compared with the example project,
-explain what is different and why the change matters.
-
-Was it easy, or surprisingly challenging and why do you think so?
+- What changed: Increased the API client timeout to 60s in the notebook.
+- Why: Reduce false `TIMEOUT` errors when the hosted API is slow or cold-starting.
+- How verified: Re-ran baseline and edge-case calls in
+	`notebooks/ml_07_shelhamer.ipynb` and confirmed predictions returned
+	instead of `TIMEOUT` messages.
+- Result: Fewer spurious timeouts during investigation.
+- Effort: Single-line, low-risk change in the `predict()` helper.
 
 ## Phase 5. Custom Project
 
-Describe your custom investigation of the deployed model.
-
-Be specific about what changed from the example project.
-
-### Basis and API
-
-Describe the deployed model and API you started with.
-
-Include:
-
-- The example model and what it predicts
-- The API endpoint and what inputs it expects
-- Why you chose to keep or change the endpoint or model
-
-### Investigation Approach
-
-Describe how you investigated the model's behavior.
-
-Include:
-
-- Which features you varied and why
-- How you structured your tests (single feature, grid, edge cases)
-- What you were trying to learn about the model
-
-### Findings: Feature Sensitivity
-
-Describe what you observed when varying individual features.
-
-Include:
-
-- Which features had the most influence on predictions
-- Where the decision boundary appeared to shift
-- Any surprising or counterintuitive results
-
-### Findings: Edge Cases
-
-Describe what happened with unusual or invalid inputs.
-
-Include:
-
-- What edge cases you tested
-- How the API responded (prediction, error, or unexpected behavior)
-- What this tells you about the model's robustness
-
-### Summary
-
-Summarize your custom investigation.
-
-Include:
-
-- What you learned about the model's behavior
-- Where it appears confident and where it seems fragile
-- What you would change about the API contract or model
-- What kinds of real problems this approach could apply to
-
-Display at least one chart or screenshot showing your findings.
+- What changed: Added a robustness evaluation that measures prediction
+	stability under small relative perturbations (`robustness_score`).
+- Why: Surface model fragility to small measurement noise; complement
+	point predictions with a stability metric.
+- How verified: Ran `robustness_score()` across baselines and a small
+	input grid in `notebooks/ml_07_shelhamer.ipynb`; produced a robustness
+	heatmap and logged fractional-stability scores.
+- Result: Identified regions of low/high stability to guide analysis.
+- Location: Implementation and outputs are in
+	`notebooks/ml_07_shelhamer.ipynb`.
